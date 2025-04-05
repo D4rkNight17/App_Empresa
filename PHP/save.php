@@ -7,13 +7,13 @@ $contrasenia_cliente = $_POST['usuario_password'];
 
 
 // Verificar
-$veridicar_usuario = mysqli_query($conectar, "SELECT * FROM cliente WHERE usuario_correo = '$usuario_correo'");
+$veridicar_usuario = mysqli_query($conectar, "SELECT * FROM usuarios WHERE usuario_correo = '$usuario_correo'");
 
 if (mysqli_num_rows($veridicar_usuario) > 0) {
   echo '
   <script>
     alert("ESTE CLIENTE YA ESTA REGISTRADO");
-    location.href="../ProyectoFinal/alta_cliente.php";
+    location.href="./auth.html";
   </script> ';
   exit;
 }
@@ -25,7 +25,7 @@ if ($query) {
     echo '
   <script>
     alert("SI SE GUARDARO LOS DATOS CORRECTAMENTE");
-    location.href="../ProyectoFinal/cliente.php";
+    location.href="./registro.html";
   </script>
   ';
   } else {
