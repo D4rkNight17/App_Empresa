@@ -1,125 +1,129 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asistente Virtual - Crear CV</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f1f1f1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .chat-container {
-            width: 350px;
-            max-width: 100%;
-            border-radius: 10px;
-            background-color: #fff;
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-            padding: 15px;
-        }
-
-        .chat-box {
-            height: 300px;
-            overflow-y: auto;
-            margin-bottom: 15px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border-radius: 10px;
-        }
-
-        .chat-box .message {
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 10px;
-            max-width: 80%;
-        }
-
-        .chat-box .user-message {
-            background-color: #007bff;
-            color: white;
-            align-self: flex-end;
-        }
-
-        .chat-box .bot-message {
-            background-color: #e0e0e0;
-            color: #333;
-            align-self: flex-start;
-        }
-
-        .input-container {
-            display: flex;
-        }
-
-        .input-container input {
-            width: 100%;
-            padding: 10px;
-            border-radius: 25px;
-            border: 1px solid #ccc;
-            margin-right: 10px;
-        }
-
-        .input-container button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-
-        .input-container button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Chat Asistente de CV</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .chat-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .chat-box {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 10px;
+    }
+    .message {
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 8px;
+      max-width: 80%;
+    }
+    .user {
+      background: #d1e7dd;
+      align-self: flex-end;
+    }
+    .bot {
+      background: #f8d7da;
+      align-self: flex-start;
+    }
+    form {
+      display: flex;
+    }
+    input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 10px;
+      border: none;
+      background: #0d6efd;
+      color: white;
+      border-radius: 5px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-
-<div class="chat-container">
-    <h3>Asistente Virtual</h3>
+  <div class="chat-container">
     <div class="chat-box" id="chat-box">
-        <!-- Mensajes del chat aparecerán aquí -->
+      <div class="message bot">👋 ¡Hola! Te ayudaré a crear tu CV. ¿Cuál es tu nombre completo?</div>
     </div>
+    <form id="chat-form">
+      <input type="text" id="user-input" placeholder="Escribe tu respuesta..." required />
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
 
-    <div class="input-container">
-        <input type="text" id="user-message" placeholder="Escribe tu mensaje..." required>
-        <button onclick="sendMessage()">Enviar</button>
-    </div>
-</div>
+  <script>
+    const form = document.getElementById("chat-form");
+    const input = document.getElementById("user-input");
+    const chatBox = document.getElementById("chat-box");
 
-<script>
-    function sendMessage() {
-        const userMessage = document.getElementById('user-message').value;
-        if (userMessage.trim() === '') return;
+    let currentQuestionIndex = 0;
+    const questions = [
+      "¿Cuál es tu nombre completo?",
+      "¿Cuál es tu número de teléfono y correo electrónico?",
+      "¿Tienes LinkedIn, portafolio web o redes profesionales relevantes?",
+      "¿Cuál es tu dirección (opcional, dependiendo del país)?",
+      "¿Cuál es tu profesión o área de expertise?",
+      "¿Qué te define como profesional en 3-4 líneas?",
+      "¿Qué valor puedes aportar a una empresa?",
+      "¿Cuáles han sido tus trabajos anteriores (empresa, puesto, periodo)?",
+      "¿Cuáles fueron tus principales logros en cada puesto? (Usa verbos de acción: Gestioné, Implementé, Logré)",
+      "¿Tienes experiencia freelance o proyectos relevantes?",
+      "¿Qué títulos o certificaciones tienes (universidad, técnico, cursos)?",
+      "¿Incluyes año de inicio y graduación?",
+      "¿Qué habilidades técnicas dominas (herramientas, idiomas, software)?",
+      "¿Qué habilidades interpersonales destacan en ti (liderazgo, comunicación)?",
+      "¿Has recibido premios, reconocimientos o certificaciones relevantes?",
+      "¿Has participado en voluntariados o proyectos extracurriculares?",
+      "¿Qué idiomas hablas y en qué nivel (B1, C2, nativo)?",
+      "¿Incluirás referencias laborales o será 'disponibles bajo petición'?",
+      "¿Tienes disponibilidad para viajar o reubicarte?",
+      "¿Quieres añadir información adicional (intereses relevantes, blog, publicaciones)?"
+    ];
 
-        // Añadir el mensaje del usuario al chat
-        const chatBox = document.getElementById('chat-box');
-        chatBox.innerHTML += `<div class="message user-message">${userMessage}</div>`;
-        document.getElementById('user-message').value = '';
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const message = input.value;
+      if (!message) return;
 
-        // Enviar el mensaje al servidor
-        fetch('chat.php', {
-            method: 'POST',
-            body: new URLSearchParams({
-                'text': userMessage
-            }),
-        })
-        .then(response => response.text())
-        .then(data => {
-            // Añadir la respuesta del bot al chat
-            chatBox.innerHTML += `<div class="message bot-message">${data}</div>`;
-            chatBox.scrollTop = chatBox.scrollHeight; // Desplazar hacia abajo
-        })
-        .catch(error => {
-            chatBox.innerHTML += `<div class="message bot-message">Error al procesar tu mensaje.</div>`;
-        });
-    }
-</script>
+      // Mostrar mensaje del usuario
+      chatBox.innerHTML += `<div class="message user">${message}</div>`;
+      chatBox.scrollTop = chatBox.scrollHeight;
 
+      // Enviar al servidor
+      const response = await fetch("chat.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: "text=" + encodeURIComponent(message) + "&question=" + currentQuestionIndex
+      });
+
+      const data = await response.text();
+
+      // Mostrar respuesta de la IA
+      chatBox.innerHTML += `<div class="message bot">${data}</div>`;
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      input.value = "";
+    });
+  </script>
 </body>
 </html>
