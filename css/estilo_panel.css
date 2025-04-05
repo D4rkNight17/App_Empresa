@@ -1,0 +1,259 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f9f9f9;
+    color: #222;
+  }
+  :root{
+    --color_azul:#225576;
+    --color_rojo:#732054;
+    --color_verde:#387534;
+  }
+  .logo{
+    border: 0cap red solid;
+    width: 70px;
+  }
+  .logo img{
+    border-radius: 50%;
+    width: 100%;
+    display: block;
+  }
+  .nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    height: 100px;
+    background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(34,85,118,1) 35%, rgba(0,212,255,1) 100%);
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .cerrar-menu{
+    display: none;
+  }
+  .logo {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+  }
+  
+  .nav-menu li a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 10px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.3s;
+  }
+  
+  .nav-menu li a:hover {
+    background-color: var(--color_rojo);
+  }
+  
+  .dashboard {
+    padding: 30px;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+  }
+  
+  .cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    flex: 1;
+    min-width: 250px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  }
+  
+  .card p {
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  .card h3 {
+    font-size: 22px;
+    margin-bottom: 5px;
+  }
+  
+  .card small {
+    color: gray;
+  }
+  
+  .resumen {
+    background: white;
+    padding: 20px;
+    margin-top: 30px;
+    border-radius: 10px;
+  }
+  
+  .resumen h3 {
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+  
+  .sub {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+  .btn_bar{
+    color: white;
+    display: none;
+  }
+  /* Para editar */
+  .crud{
+    display: flex;
+    justify-content: space-around;
+  }
+  .btn_borrar{
+    color: red;
+    padding: 5px 25px;
+    border-radius: 5px;
+  }
+  .brn_editar{
+    color: var(--color_azul);
+    padding: 5px 25px;
+    border-radius: 5px;
+  }
+  .btn_descargar{
+    color: #636571;
+    padding: 5px 25px;
+    border-radius: 5px;
+  }
+  .btn_borrar:hover{
+    color: white;
+    background-color: red;
+  }
+  .brn_editar:hover{
+    color: white;
+    background-color: var(--color_azul);
+  }
+  .btn_descargar:hover{
+    color: white;
+    background-color: var(--color_rojo);
+  }
+  /* Del perfil */
+  form {
+    width: 100%;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  form input[type="text"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border 0.3s;
+  }
+  
+  form input[type="text"]:focus {
+    border: 1px solid #00b3b3;
+    outline: none;
+    background-color: #fff;
+  }
+  form input[type="button"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border 0.3s;
+    background-color: var(--color_azul);
+    color: white;
+  }
+  
+  form input[type="button"]:hover {
+    background-color: var(--color_verde);
+    outline: none;
+  }
+  @media screen and (max-width: 480px) {
+    form {
+      padding: 20px;
+    }
+  
+    form input[type="text"] {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+  .foto_perfil{
+    border: 1px red solid;
+    width: 100px;
+    margin: auto;
+  }
+
+  @media (max-width: 768px) {
+    .btn_bar {
+      display: block;
+    }
+  
+    .menu .nav-menu {
+      flex-direction: column;
+      justify-content: flex-start;
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 280px;
+      height: 100vh;
+      background-color: #223A75;
+      color: white;
+      transition: left 0.3s ease-in-out;
+      z-index: 999;
+      padding: 70px 20px 20px;
+    }
+  
+    .nav-menu.abrir_menu {
+      left: 0;
+    }
+  
+    .nav-menu li {
+      width: 100%;
+      padding: 10px 0;
+    }
+  
+    .nav-menu li a {
+      font-size: 20px;
+      font-family: "Lato", sans-serif;
+    }
+  
+    .cerrar-menu {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      color: #f9b707;
+      font-size: 22px;
+    }
+    .cerrar-menu{
+        display: block;
+      }
+  }
+  
