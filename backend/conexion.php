@@ -1,10 +1,9 @@
 <?php
 
-
 $host = "localhost";
 $usuario = "root";
 $contrasena = "";
-$basedatos = "genmycv";
+$basedatos = "GenMyCV";
 
 $conectar = mysqli_connect($host, $usuario, $contrasena, $basedatos);
 
